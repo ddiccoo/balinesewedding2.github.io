@@ -29,10 +29,7 @@
       rel="stylesheet"
     />
 
-    <link
-      rel="stylesheet"
-      href="https://undangandigitalbali.com/assets/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/slick.css" />
     <link rel="stylesheet" href="assets/css/magnific-popup.css" />
@@ -42,13 +39,96 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@300;400&display=swap"
       rel="stylesheet"
     />
-
     <!-- Favicons -->
     <link href="assets/img/logo2.svg" rel="icon" />
     <link
       href="https://undangandigitalbali.com/assets/images/apple-touch-icon.png"
       rel="apple-touch-icon"
     />
+
+    <!-- Style Ucapan -->
+    <style>
+      .kartu-ucapan {
+        background-color: #f8f4f0;
+        padding: 60px 0; /* Memberi ruang napas atas-bawah */
+        font-family: "Montserrat", sans-serif;
+      }
+      .container-undangan {
+        max-width: 550px; /* Sedikit lebih ramping agar elegan */
+        margin: 0 auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 20px; /* Sudut lebih lembut */
+        box-shadow: 0 15px 35px rgba(141, 119, 95, 0.1); /* Shadow lembut warna cokelat */
+        border: 1px solid #e0d5c1;
+      }
+      .ucapan-font {
+        font-family: "Playfair Display", serif;
+        color: #8d775f; /* Muted Gold */
+        text-align: center;
+      }
+      .btn-elegant {
+        background: #8d775f;
+        color: white;
+        border: none;
+        transition: 0.3s;
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+      }
+      .btn-elegant:hover {
+        background: #6f5d4a;
+        color: white;
+      }
+      /* Kontainer Scroll Otomatis */
+      .scroll-ucapan {
+        height: 450px; /* Ukuran pas untuk desktop */
+        overflow-y: auto;
+        padding-right: 15px;
+        margin-top: 25px;
+      }
+      /* Custom Scrollbar */
+      .scroll-ucapan::-webkit-scrollbar {
+        width: 5px;
+      }
+      .scroll-ucapan::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      .scroll-ucapan::-webkit-scrollbar-thumb {
+        background: #d1c4b2;
+        border-radius: 10px;
+      }
+
+      .box-ucapan {
+        background: #fffcf9;
+        border-left: 4px solid #8d775f;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 0 12px 12px 0;
+        transition: transform 0.3s ease;
+      }
+      .box-ucapan:hover {
+        transform: translateX(5px); /* Efek interaktif saat kursor lewat */
+      }
+      .nama {
+        font-weight: 700;
+        color: #8d775f;
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+      .pesan {
+        font-style: italic;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #555;
+      }
+      hr.divider {
+        border-top: 2px solid #e0d5c1;
+        width: 50px;
+        margin: 20px auto;
+      }
+    </style>
   </head>
   <body>
     <!-- MUSIC -->
@@ -507,156 +587,64 @@
       <div class="ucapan-hero"></div>
     </section>
 
-    <!-- UCAPAN -->
-    <section class="ucapan js-section" id="ucapan">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 offset-md-2 container-undangan">
-            <h2 class="heading-text" data-aos="fade-up">Kirim Ucapan & Doa</h2>
-            <p class="text-center mb-4 small" data-aos="fade-up">
-              Berikan doa restu bagi kedua mempelai
-            </p>
+    <!-- KARTU UCAPAN -->
+    <section class="kartu-ucapan">
+      <div class="container-undangan">
+        <h2 class="ucapan-font">Kirim Ucapan & Doa</h2>
+        <p class="text-center mb-4 small">
+          Berikan doa restu bagi kedua mempelai
+        </p>
 
-            <form id="formUcapan" class="mb-4" data-aos="fade-up">
-              <div class="mb-3">
-                <input
-                  type="text"
-                  name="nama"
-                  id="inputNama"
-                  class="form-control form-control-lg"
-                  placeholder="Nama Anda"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <textarea
-                  name="pesan"
-                  id="inputPesan"
-                  class="form-control"
-                  rows="4"
-                  placeholder="Tulis ucapan manis Anda..."
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" id="btnKirim" class="btn btn-elegant">
-                Kirim Ucapan
-              </button>
-              <div id="statusPesan" class="mt-2 text-center small"></div>
-            </form>
+        <form id="formUcapan">
+          <div class="mb-3">
+            <input
+              type="text"
+              name="nama"
+              id="inputNama"
+              class="form-control form-control-lg"
+              placeholder="Nama Anda"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <textarea
+              name="pesan"
+              id="inputPesan"
+              class="form-control"
+              rows="4"
+              placeholder="Tulis ucapan manis Anda..."
+              required
+            ></textarea>
+          </div>
+          <button type="submit" id="btnKirim" class="btn btn-elegant">
+            Kirim Ucapan
+          </button>
+          <div id="statusPesan" class="mt-2 text-center"></div>
+        </form>
 
-            <hr class="divider" />
-            <h3
-              class="text-center mb-4"
-              style="
-                font-family: &quot;Playfair Display&quot;, serif;
-                color: #8d775f;
-              "
-            >
-              Daftar Ucapan
-            </h3>
+        <hr class="divider" />
+        <h3 class="ucapan-font">Daftar Ucapan</h3>
 
-            <div class="scroll-ucapan" id="daftarUcapan">
-              <?php include 'koneksi.php'; // $query = "SELECT * FROM ucapan
-              ORDER BY created_at DESC"; $tampil = mysqli_query($conn, $query);
-              while($data = mysqli_fetch_array($tampil)) { echo "
-              <div class="box-ucapan">
-                "; echo "
-                <div class="nama">" . htmlspecialchars($data['nama']) . "</div>
-                "; echo "
-                <div class="pesan">
-                  \"" . nl2br(htmlspecialchars($data['pesan'])) . "\"
-                </div>
-                "; echo "
-                <div class="mt-2" style="font-size: 0.7rem; color: #b5ad9f">
-                  " . date('d M Y, H:i', strtotime($data['created_at'])) . "
-                </div>
-                "; echo "
-              </div>
-              "; } ?>
+        <div class="scroll-ucapan" id="daftarUcapan">
+          <?php include 'koneksi.php'; // Hubungkan ke database $query = "SELECT
+          * FROM ucapan ORDER BY created_at DESC"; $tampil = mysqli_query($conn,
+          $query); while($data = mysqli_fetch_array($tampil)) { ?>
+          <div class="box-ucapan">
+            <div class="nama">
+              <?php echo htmlspecialchars($data['nama']); ?>
+            </div>
+            <div class="pesan">
+              "<?php echo nl2br(htmlspecialchars($data['pesan'])); ?>"
+            </div>
+            <div class="mt-2" style="font-size: 0.7rem; color: #b5ad9f">
+              <?php echo date('d M Y, H:i', strtotime($data['created_at'])); ?>
             </div>
           </div>
+          <?php } ?>
         </div>
       </div>
-      <style>
-        .container-undangan {
-          background: #ffffff; /* Putih bersih agar kontras */
-          padding: 40px;
-          border-radius: 15px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-          border: 1px solid #d1c4ae;
-          margin-bottom: 50px;
-        }
-
-        /* Mewarnai label dan teks input agar lebih tegas */
-        .form-control::placeholder {
-          color: #888;
-        }
-        .form-control {
-          border: 1px solid #8d775f;
-          color: #333; /* Warna teks saat mengetik */
-        }
-
-        .btn-elegant {
-          background: #8d775f;
-          color: #ffffff;
-          font-weight: bold;
-          width: 100%;
-          padding: 12px;
-          border-radius: 8px;
-          border: none;
-          transition: 0.3s;
-        }
-        .btn-elegant:hover {
-          background: #6b5a48;
-          color: #fff;
-        }
-
-        .scroll-ucapan {
-          height: 400px;
-          overflow-y: auto;
-          padding-right: 10px;
-          margin-top: 20px;
-        }
-
-        .box-ucapan {
-          background: #fdfaf5;
-          border-left: 5px solid #8d775f;
-          padding: 15px;
-          margin-bottom: 15px;
-          border-radius: 0 8px 8px 0;
-          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Warna Nama Pengirim */
-        .nama {
-          font-weight: 800;
-          color: #5a4a3a; /* Cokelat tua agar sangat jelas */
-          font-size: 1.1rem;
-          margin-bottom: 5px;
-        }
-
-        /* Warna Pesan/Ucapan */
-        .pesan {
-          color: #2c2c2c; /* Hitam keabuan untuk keterbacaan maksimal */
-          font-style: italic;
-          line-height: 1.5;
-        }
-
-        /* Warna Tanggal/Waktu */
-        .box-ucapan .mt-2 {
-          font-size: 0.75rem;
-          color: #666 !important; /* Dipertegas dari sebelumnya */
-          font-weight: 500;
-        }
-
-        .divider {
-          border-top: 2px solid #8d775f;
-          width: 60px;
-          margin: 25px auto;
-        }
-      </style>
     </section>
-    <!-- UCAPAN END -->
+    <!-- KARTU UCAPAN END -->
 
     <!-- AMPLOP -->
     <section class="amplop text-center">

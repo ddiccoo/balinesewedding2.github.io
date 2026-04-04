@@ -892,35 +892,29 @@ header {
 }
 
 /* BUKU TAMU */
-@media (max-width: 768px) {
-  .scroll {
-    margin: 0;
-    padding: 0;
+/* Responsif untuk HP */
+@media (max-width: 576px) {
+  .container-undangan {
+    margin: 0 15px; /* Memberi jarak di pinggir layar HP */
+    padding: 20px;
+  }
+  .scroll-ucapan {
+    height: 300px; /* Lebih pendek di HP agar tidak terlalu panjang */
   }
 }
 
-/*Buku Tamu */
-.rsvp-form {
-  width: 100%;
-  margin: 20px 10px 10px;
-}
-
 @media (min-width: 768px) {
-  .rsvp-form {
+  .container-undangan {
     width: 70%;
     margin: 20px auto 10px;
   }
 }
 
 @media (min-width: 992px) {
-  .rsvp-form {
+  .container-undangan {
     width: 60%;
     margin: 20px auto 10px;
   }
-}
-
-.rsvp-box .rsvp-form {
-  margin-top: 50px;
 }
 
 /*FOOTER*/
