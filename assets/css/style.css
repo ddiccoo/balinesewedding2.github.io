@@ -1,8 +1,7 @@
 /* UMUM */
 @font-face {
   font-family: "modernline";
-  src: url("https://undangandigitalbali.com/assets/fonts/modernline.woff")
-    format("woff");
+  src: url("../fonts/modernline.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   height: 100%;
