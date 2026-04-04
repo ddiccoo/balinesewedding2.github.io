@@ -76,10 +76,6 @@
     });
   });
 
-  $(document).ready(function () {
-    $("#list-ucapan").load("load.php");
-  });
-
   var buttonmodal = document.getElementById("btn-open");
   var button = document.getElementById("buttonmusic");
   var audio = document.getElementById("player");

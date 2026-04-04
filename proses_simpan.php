@@ -2,18 +2,17 @@
 include 'koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nama = mysqli_real_escape_string(mysql: $conn, string: $_POST['nama']);
-    $pesan = mysqli_real_escape_string(mysql: $conn, string: $_POST['pesan']);
+    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
+    $pesan = mysqli_real_escape_string($conn, $_POST['pesan']);
+    $konfirmasi = mysqli_real_escape_string($conn, $_POST['konfirmasi']); // Tambahan RSVP
 
-    $sql = "INSERT INTO ucapan (nama, pesan) VALUES ('$nama', '$pesan')";
+    $sql = "INSERT INTO ucapan (nama, pesan, konfirmasi) VALUES ('$nama', '$pesan', '$konfirmasi')";
 
-    if (mysqli_query(mysql: $conn, query: $sql)) {
-        // Kembali ke halaman utama setelah berhasil
-        header(header: "Location: index.php");
+    if (mysqli_query($conn, $sql)) {
+        echo "success"; // Respon untuk AJAX
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error(mysql: $conn);
+        echo "Error: " . mysqli_error($conn);
     }
 }
-
-mysqli_close(mysql: $conn);
+mysqli_close($conn);
 ?>

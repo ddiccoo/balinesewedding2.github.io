@@ -606,6 +606,21 @@
               required
             />
           </div>
+
+          <div class="mb-3">
+            <select
+              name="konfirmasi"
+              id="inputKonfirmasi"
+              class="form-control"
+              required
+            >
+              <option value="">— Konfirmasi Kehadiran —</option>
+              <option value="Hadir">Hadir</option>
+              <option value="Ragu-ragu">Ragu-ragu</option>
+              <option value="Tidak Hadir">Tidak Hadir</option>
+            </select>
+          </div>
+
           <div class="mb-3">
             <textarea
               name="pesan"
@@ -626,12 +641,23 @@
         <h3 class="ucapan-font">Daftar Ucapan</h3>
 
         <div class="scroll-ucapan" id="daftarUcapan">
-          <?php include 'koneksi.php'; // Hubungkan ke database $query = "SELECT
-          * FROM ucapan ORDER BY created_at DESC"; $tampil = mysqli_query($conn,
-          $query); while($data = mysqli_fetch_array($tampil)) { ?>
+          <?php include 'koneksi.php'; $query = "SELECT * FROM ucapan ORDER BY
+          id DESC"; // Perbaikan query $tampil = mysqli_query($conn, $query);
+          while($data = mysqli_fetch_array($tampil)) { ?>
           <div class="box-ucapan">
             <div class="nama">
               <?php echo htmlspecialchars($data['nama']); ?>
+              <span
+                class="badge"
+                style="
+                  background: #8d775f;
+                  font-size: 0.7rem;
+                  color: white;
+                  margin-left: 5px;
+                "
+              >
+                <?php echo htmlspecialchars($data['konfirmasi']); ?>
+              </span>
             </div>
             <div class="pesan">
               "<?php echo nl2br(htmlspecialchars($data['pesan'])); ?>"
@@ -786,8 +812,10 @@
         if (namaTamu) {
           $("#inputNama").val(namaTamu);
         }
+      });
 
-        // Handle Form Submit via AJAX
+      // Handle Form Submit via AJAX
+      $(document).ready(function () {
         $("#formUcapan").on("submit", function (e) {
           e.preventDefault();
           $("#btnKirim").prop("disabled", true).text("Mengirim...");
@@ -797,31 +825,23 @@
             type: "POST",
             data: $(this).serialize(),
             success: function (response) {
-              // Tambahkan ucapan baru ke daftar paling atas secara instan
               const nama = $("#inputNama").val();
               const pesan = $("#inputPesan").val();
-              const waktu = "Baru saja";
+              const konfirmasi = $("#inputKonfirmasi").val();
 
               const htmlBaru = `
                     <div class='box-ucapan' style='display:none;'>
-                        <div class='nama'>${nama}</div>
+                        <div class='nama'>${nama} <span class='badge' style='background: #8d775f; color: white;'>${konfirmasi}</span></div>
                         <div class='pesan'>"${pesan}"</div>
-                        <div class='mt-2' style='font-size: 0.7rem; color:#b5ad9f;'>${waktu}</div>
+                        <div class='mt-2' style='font-size: 0.7rem; color:#b5ad9f;'>Baru saja</div>
                     </div>`;
 
               $("#daftarUcapan").prepend(htmlBaru);
               $(".box-ucapan").first().fadeIn();
 
-              // Reset form
               $("#inputPesan").val("");
               $("#statusPesan").html(
-                "<span class='text-success'>Ucapan berhasil dikirim!</span>",
-              );
-              $("#btnKirim").prop("disabled", false).text("Kirim Ucapan");
-            },
-            error: function () {
-              $("#statusPesan").html(
-                "<span class='text-danger'>Gagal mengirim ucapan.</span>",
+                "<span class='text-success'>Ucapan & RSVP berhasil dikirim!</span>",
               );
               $("#btnKirim").prop("disabled", false).text("Kirim Ucapan");
             },
